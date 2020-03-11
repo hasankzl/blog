@@ -6,13 +6,13 @@ import {ACCESS_TOKEN} from "./constants";
 const PrivateRoute= ({component:Component,...rest}) =>(
     <Route 
     {...rest}
-    render ={props =>{
-        const hasToken = !!(localStorage[ACCESS_TOKEN]);
+    render={props =>{
+        const hasToken= !!(localStorage[ACCESS_TOKEN]);
 
         return hasToken ? (
             <Component {...props} />
         ): 
-        <Redirect to={{pathname:"/home",state: {from:props.location}}} />
+        <Redirect to={{pathname:"/register",state: {from:props.location}}} />
     }}
     />
 );

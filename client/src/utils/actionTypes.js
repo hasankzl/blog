@@ -9,3 +9,8 @@ export const SUBMIT_LOGIN="SUBMIT_LOGIN";
 export const LOGIN_PENDING="LOGIN_PENDING";
 export const LOGIN_SUCCESS="LOGIN_SUCCESS";
 export const LOGIN_FAIL="LOGIN_FAIL";
+
+// Register
+export const REGISTER="REGISTER";
+export const REGISTER_SUCCESS="REGISTER_SUCCESS";
+export const REGISTER_FAIL="REGISTER_FAIL";
