@@ -12,10 +12,13 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "0.9.5",
+    "react-skylight": "^0.5.1",
+    "react-spring": "^8.0.27",
     "redux": "^4.0.5",
     "redux-logger": "^3.0.6",
     "redux-promise-middleware": "^6.1.2",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "toasted-notes": "^3.2.0"
   },
   "devDependencies": {},
   "scripts": {

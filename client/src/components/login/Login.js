@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { submitLogin } from "./action";
+import { submitLogin, sendPasswordEmail } from "./action";
 import { connect } from "react-redux"
 import { Redirect } from "react-router";
 import Button from '@material-ui/core/Button';
@@ -13,14 +13,15 @@ import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import {themeColor,bgColor} from "../../utils/constants"
+import { themeColor, bgColor } from "../../utils/constants"
+import SkyLight from 'react-skylight';
 const styles = theme => ({
     root: {
         flexGrow: 1
     },
     avatar: {
         margin: theme.spacing(1),
-        backgroundColor:bgColor
+        backgroundColor: bgColor
     },
     paper: {
         marginTop: theme.spacing(8),
@@ -29,13 +30,13 @@ const styles = theme => ({
         alignItems: 'center',
         '& label.Mui-focused': {
             color: themeColor,
-          },
-          '& link': {
+        },
+        '& link': {
             color: themeColor,
-          },
-          '& .MuiInput-underline:after': {
+        },
+        '& .MuiInput-underline:after': {
             borderBottomColor: themeColor,
-          },
+        },
     },
     form: {
         width: '100%', // Fix IE 11 issue.
@@ -43,24 +44,26 @@ const styles = theme => ({
     },
     submit: {
         margin: theme.spacing(3, 0, 2),
-        color:themeColor,
-        marginBottom:"40px",
+        color: themeColor,
+        marginBottom: "40px",
         '&:hover': {
             background: bgColor,
-         },
+        },
     },
-    themeColor:{
-        color:themeColor,
+
+    themeColor: {
+        color: themeColor,
         '& Checkbox-checked': {
             color: bgColor,
-          },
+        },
     }
 })
 
 class Login extends Component {
     state = {
         username: "",
-        password: ""
+        password: "",
+        email: ""
     }
     inputHandler = (e) => {
 
@@ -69,12 +72,22 @@ class Login extends Component {
         })
     }
     submitHandler = (e) => {
-    e.preventDefault();
-        this.props.submitLogin(this.state);
+        e.preventDefault();
+        const login = {
+            username:this.state.username,
+            password:this.state.password
+        }
+        this.props.submitLogin(login);
+        debugger;
     }
-
+    resetPassword = e => {
+        e.preventDefault();
+        this.props.sendPasswordEmail(this.state.email);
+    }
     render() {
-
+        const dialog = {
+            color: themeColor
+        }
         const { state, props } = this;
         const { classes } = this.props;
         return props.loggedIn ? (<Redirect to={{ pathname: "/", state: { from: props.location } }} />) : (
@@ -87,15 +100,15 @@ class Login extends Component {
                     <form className={classes.form} noValidate onSubmit={e => this.submitHandler(e)}>
                         <Typography variant="h5" className={classes.themeColor} component="h1" align="center">Sign in</Typography>
                         <Grid>
-                            <TextField label="Username" autoFocus  margin="normal" required fullWidth name="username" type="text" onChange={e => this.inputHandler(e)} value={state.username} /><br />
+                            <TextField label="Username" autoFocus margin="normal" required fullWidth name="username" type="text" onChange={e => this.inputHandler(e)} value={state.username} /><br />
                         </Grid>
 
                         <Grid>
-                            <TextField label="Password"   margin="normal" required
+                            <TextField label="Password" margin="normal" required
                                 fullWidth name="password" type="password" onChange={e => this.inputHandler(e)} value={state.password} />
                         </Grid>
                         <FormControlLabel
-                         className={classes.themeColor} 
+                            className={classes.themeColor}
                             control={<Checkbox value="remember" />}
                             label="Remember me"
                         />
@@ -103,18 +116,18 @@ class Login extends Component {
                         <Button
                             type="submit"
                             fullWidth
-                   
+
                             className={classes.submit}
-                         >Login</Button>
+                        >Login</Button>
 
                         <Grid container>
                             <Grid item xs>
-                                <Link href="#" variant="body2"  className={classes.themeColor} >
+                                <Link onClick={() => this.animated.show()} variant="body2" className={classes.themeColor} >
                                     Forgot password?
                                </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="/register" variant="body2"  className={classes.themeColor} >
+                                <Link href="/register" variant="body2" className={classes.themeColor} >
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
@@ -122,7 +135,30 @@ class Login extends Component {
                     </form>
                 </div>
 
+                <SkyLight
+                    hideOnOverlayClicked
+                    ref={ref => this.animated = ref}
+                    title="Forgot password?"
+                    transitionDuration={2000}
+                    dialogStyles={dialog}
+                >
+                    <Container>
+                        <form className={classes.form} noValidate onSubmit={e => this.resetPassword(e)}>
+                            <Grid>
+                                <TextField label="Enter your Email " autoFocus margin="normal"
+                                    required fullWidth name="forgotEmail" type="text" name="email" onChange={e => this.inputHandler(e)}
+                                    value={state.email}
+                                /><br />
+                            </Grid>
+                            <Button
+                                type="submit"
+                                fullWidth
 
+                                className={classes.submit}
+                            >Send Email</Button>
+                        </form>
+                    </Container>
+                </SkyLight>
             </Container>
         )
     }
@@ -133,6 +169,7 @@ const mapStateToProps = ({ loginReducer }) => ({
     error: loginReducer.error
 })
 const mapDispatchToProps = {
-    submitLogin
+    submitLogin,
+    sendPasswordEmail
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login))

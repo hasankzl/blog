@@ -14,8 +14,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.context.annotation.Bean;
 
-import static com.kuzulu.blog.security.SecurityConstants.CONFIRM_REGISTRATION;
-import static com.kuzulu.blog.security.SecurityConstants.SIGN_UP_URL;
+import static com.kuzulu.blog.security.SecurityConstants.*;
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -33,6 +32,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable().authorizeRequests()
                 .antMatchers(HttpMethod.POST, SIGN_UP_URL).permitAll()
                 .antMatchers(HttpMethod.GET,CONFIRM_REGISTRATION).permitAll()
+                .antMatchers(HttpMethod.POST,PASSWORD_RESET_EMAIL).permitAll()
+                .antMatchers(HttpMethod.POST,PASSWORD_RESET_TOKEN).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .addFilter(new JWTAuthenticationFilter(authenticationManager()))
@@ -45,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
         auth.inMemoryAuthentication()
-                .withUser("cem")
+                .withUser("hasan")
                 .password("pass")
                 .roles("ADMIN");
     }

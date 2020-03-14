@@ -35,4 +35,15 @@ public class UserServiceImpl implements UserService {
             return new User(user.getUsername(), user.getPassword(), emptyList());
         }
     }
+
+    @Override
+    public void changePassword(Users user, String password) {
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        userRepository.save(user);
+    }
+
+    @Override
+    public Users findByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

@@ -8,4 +8,8 @@ public interface UserService {
     void save(Users users);
 
     UserDetails findByUsername(String Username);
+
+    void changePassword(Users user,String password);
+
+    Users findByEmail(String email);
 }

@@ -7,4 +7,6 @@ public class SecurityConstants {
     public static final String HEADER_STRING = "Authorization";
     public static final String SIGN_UP_URL = "/user/sign-up";
     public static final String CONFIRM_REGISTRATION="/user/confirmRegistration";
+    public static final String PASSWORD_RESET_EMAIL="/user/sendPasswordEmail";
+    public static final String PASSWORD_RESET_TOKEN="/user/resetPassword";
 }

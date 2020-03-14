@@ -12,11 +12,11 @@ import java.util.Collection;
 
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "users")
 public class Users implements Serializable, UserDetails {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer user_id;
     @NotEmpty(message = "Username can't be null.")
     private String username;
@@ -29,6 +29,7 @@ public class Users implements Serializable, UserDetails {
     private String email;
     @Column(name = "isEnabled")
     private boolean isEnabled;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

@@ -5,3 +5,4 @@ export const bgColor="#ffe900"
 
 
 export const REGISTER_URL="user/sign-up";
+export const SEND_PASSWORD_EMAIL="user/sendPasswordEmail";
