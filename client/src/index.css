@@ -6,3 +6,7 @@ body {
 .submit{
   background-color: red;
 }
+.skylight {
+  background-color: red;
+  height: 200px !important;
+}

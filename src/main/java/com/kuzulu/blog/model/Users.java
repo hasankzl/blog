@@ -27,8 +27,8 @@ public class Users implements Serializable, UserDetails {
     @NotEmpty(message = "email can't be null.")
     @Email
     private String email;
-    @Column(name = "isEnabled")
-    private boolean isEnabled;
+    @Column(name = "is_enabled")
+    private boolean enabled;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -53,5 +53,9 @@ public class Users implements Serializable, UserDetails {
     @Override
     public boolean isEnabled() {
         return false;
+    }
+
+    public boolean getEnabled() {
+        return enabled;
     }
 }

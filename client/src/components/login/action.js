@@ -1,8 +1,9 @@
 import axios from "axios"
-import { ACCESS_TOKEN ,SEND_PASSWORD_EMAIL} from "../../utils/constants";
+import { ACCESS_TOKEN, SEND_PASSWORD_EMAIL } from "../../utils/constants";
 import { LOGIN_SUCCESS, LOGIN_PENDING, LOG_OUT } from "../../utils/actionTypes";
 import { NotificationManager } from 'react-notifications';
 import toast from 'toasted-notes';
+import React from "react"
 export const submitLogin = ({ username, password }) => async dispatch => {
     dispatch({
         type: LOGIN_PENDING
@@ -25,7 +26,7 @@ export const submitLogin = ({ username, password }) => async dispatch => {
                     user
                 }
             })
-            axios.defaults.headers.common["Authorization"] = 'Bearer ' + localStorage.token;
+            axios.defaults.headers.common["Authorization"] = 'Bearer ' + sessionStorage.token;
         })
         .catch(error => {
             toast.notify("Username or password aren't correct")
@@ -34,19 +35,21 @@ export const submitLogin = ({ username, password }) => async dispatch => {
 
 export const sendPasswordEmail = email => async dispatch => {
 
-    await axios.post(SEND_PASSWORD_EMAIL,{email:email})
+    await axios.post(SEND_PASSWORD_EMAIL, { email: email })
         .then(res => {
             toast.notify("We've send a email for reset your password please check it ")
         })
-        .catch(res =>{
-            NotificationManager.warning('Something went wrong please try again','Warning')
+        .catch(res => {
+            NotificationManager.warning('Something went wrong please try again', 'Warning')
         })
 }
 
-export const logout = () => {
+export const logout = () => async dispatch => {
+    window.location = "/#"
     sessionStorage.clear();
-    window.location = "/#login";
-    return {
+    axios.defaults.headers.common["Authorization"]="";
+    dispatch({
         type: LOG_OUT
-    }
+    })
+
 }

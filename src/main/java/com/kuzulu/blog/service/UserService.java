@@ -5,11 +5,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public interface UserService {
 
-    void save(Users users);
+    void save(Users user);
 
     UserDetails findByUsername(String Username);
 
     void changePassword(Users user,String password);
 
     Users findByEmail(String email);
+
+    void confirmEmail(Users user);
 }

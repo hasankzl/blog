@@ -14,3 +14,7 @@ export const LOGIN_FAIL="LOGIN_FAIL";
 export const REGISTER="REGISTER";
 export const REGISTER_SUCCESS="REGISTER_SUCCESS";
 export const REGISTER_FAIL="REGISTER_FAIL";
+
+// Forgot Password
+export const CHANGE_SUCCESS="CHANGE_SUCCESS";
+export const CHANGE_FAIL="CHANGE_FAIL";

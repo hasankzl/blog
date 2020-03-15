@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { submitLogin, sendPasswordEmail } from "./action";
 import { connect } from "react-redux"
 import { Redirect } from "react-router";
-import Button from '@material-ui/core/Button';
+import Button from '../metarial/Button';
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Avatar from '@material-ui/core/Avatar';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import TextField from '@material-ui/core/TextField';
+import TextField from '../metarial/TextField';
 import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Link from '@material-ui/core/Link';
@@ -28,34 +28,19 @@ const styles = theme => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        '& label.Mui-focused': {
-            color: themeColor,
-        },
-        '& link': {
-            color: themeColor,
-        },
-        '& .MuiInput-underline:after': {
-            borderBottomColor: themeColor,
-        },
     },
     form: {
         width: '100%', // Fix IE 11 issue.
         marginTop: theme.spacing(1),
     },
-    submit: {
-        margin: theme.spacing(3, 0, 2),
-        color: themeColor,
-        marginBottom: "40px",
-        '&:hover': {
-            background: bgColor,
-        },
-    },
+
 
     themeColor: {
         color: themeColor,
         '& Checkbox-checked': {
             color: bgColor,
         },
+        marginTop:"15px"
     }
 })
 
@@ -74,11 +59,10 @@ class Login extends Component {
     submitHandler = (e) => {
         e.preventDefault();
         const login = {
-            username:this.state.username,
-            password:this.state.password
+            username: this.state.username,
+            password: this.state.password
         }
         this.props.submitLogin(login);
-        debugger;
     }
     resetPassword = e => {
         e.preventDefault();
@@ -86,6 +70,8 @@ class Login extends Component {
     }
     render() {
         const dialog = {
+            width: '50%',
+            minHeight: '102px',
             color: themeColor
         }
         const { state, props } = this;
@@ -98,7 +84,7 @@ class Login extends Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <form className={classes.form} noValidate onSubmit={e => this.submitHandler(e)}>
-                        <Typography variant="h5" className={classes.themeColor} component="h1" align="center">Sign in</Typography>
+                        <Typography variant="h5"  component="h1" align="center">Sign in</Typography>
                         <Grid>
                             <TextField label="Username" autoFocus margin="normal" required fullWidth name="username" type="text" onChange={e => this.inputHandler(e)} value={state.username} /><br />
                         </Grid>
@@ -116,18 +102,16 @@ class Login extends Component {
                         <Button
                             type="submit"
                             fullWidth
-
-                            className={classes.submit}
                         >Login</Button>
 
                         <Grid container>
                             <Grid item xs>
                                 <Link onClick={() => this.animated.show()} variant="body2" className={classes.themeColor} >
-                                    Forgot password?
-                               </Link>
+                                    {"Forgot password?"}
+                                </Link>
                             </Grid>
                             <Grid item>
-                                <Link href="/register" variant="body2" className={classes.themeColor} >
+                                <Link href="#/register" variant="body2" className={classes.themeColor} >
                                     {"Don't have an account? Sign Up"}
                                 </Link>
                             </Grid>
@@ -153,8 +137,6 @@ class Login extends Component {
                             <Button
                                 type="submit"
                                 fullWidth
-
-                                className={classes.submit}
                             >Send Email</Button>
                         </form>
                     </Container>

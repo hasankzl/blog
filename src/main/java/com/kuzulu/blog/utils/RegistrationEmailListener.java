@@ -24,7 +24,6 @@ public class RegistrationEmailListener implements ApplicationListener<OnRegistra
     public void onApplicationEvent(OnRegistrationSuccessEvent event) {
         this.confirmRegistration(event);
     }
-
     private void confirmRegistration(OnRegistrationSuccessEvent event){
         Users user = event.getUser();
         String token = UUID.randomUUID().toString();
@@ -37,34 +36,13 @@ public class RegistrationEmailListener implements ApplicationListener<OnRegistra
 
         String subject = "Registration Confirmation";
 
-        String url = event.getAppUrl()+"/confirmRegistration?token="+token;
-        String message = "Thank you for registering.Please click on the below link to activate your account /n ";
+        String url = event.getAppUrl()+"/confirmEmail/?"+token;
+        String message = "Thank you for registering.Please click on the below link to activate your account ";
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(recipient);
         email.setSubject(subject);
-        email.setText(message+"http://localhost:8080"+url);
-        mailSender.send(email);
-    }
-    private void forgotPassword(OnRegistrationSuccessEvent event){
-        Users user = event.getUser();
-        String token = UUID.randomUUID().toString();
-        UserToken userToken = new UserToken();
-        userToken.setUser(user);
-        userToken.setToken(token);
-        userTokenService.createVerificationToken(userToken);
-
-        String recipient = user.getEmail();
-
-        String subject = "Reset Pasword";
-
-        String url = event.getAppUrl()+"/resetPassword?token="+token;
-        String message = "Please click the link to reset your password";
-
-        SimpleMailMessage email = new SimpleMailMessage();
-        email.setTo(recipient);
-        email.setSubject(subject);
-        email.setText(message+"http://localhost:8080"+url);
+        email.setText(message+"http://localhost:3000/#"+url);
         mailSender.send(email);
     }
 }
