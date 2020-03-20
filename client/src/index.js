@@ -5,6 +5,7 @@ import './index.css';
 import {HashRouter} from "react-router-dom";
 import {Provider } from "react-redux";
 import axios from "axios";
+import "./utils/axiosConfig"
 import store from "./utils/store";
 import 'toasted-notes/src/styles.css';
 import {API_BASE_URL} from "./utils/constants"

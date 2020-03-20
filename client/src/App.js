@@ -12,6 +12,8 @@ import { withStyles } from '@material-ui/core/styles';
 import 'react-notifications/lib/notifications.css';
 import { NotificationContainer, NotificationManager } from 'react-notifications';
 import { bgColor } from './utils/constants';
+import Loader from "./utils/loader"
+import { connect } from "react-redux"
 const basicStyles = (theme) => ({
   siteTheme: {
     color: "#00cc00",
@@ -31,20 +33,25 @@ const basicStyles = (theme) => ({
 class App extends Component {
   render() {
     const { classes } = this.props;
+    const { fetching } = this.props
     return (
       <div className={classes.siteTheme}>
         <Header />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/register" component={Register} />
-          <Route path="/forgotPassword" component={ForgotPassword} />
-          <Route path="/confirmEmail" component={ConfirmEmail} />
-        </Switch>
-        <NotificationContainer />
+        <Loader active={fetching}>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
+            <Route path="/forgotPassword" component={ForgotPassword} />
+            <Route path="/confirmEmail" component={ConfirmEmail} />
+          </Switch>
+          <NotificationContainer />
+        </Loader>
       </div>
     );
   }
 }
-
-export default withRouter(withStyles(basicStyles)(App));
+const mapStateToProps = ({ axiosReducer }) => ({
+  fetching: axiosReducer.fetching
+})
+export default connect(mapStateToProps)(withRouter(withStyles(basicStyles)(App)));
