@@ -7,7 +7,11 @@ public interface UserService {
 
     void save(Users user);
 
+    void update(Users user);
+
     UserDetails findByUsername(String Username);
+
+    Users getUserByUsername(String username);
 
     void changePassword(Users user,String password);
 

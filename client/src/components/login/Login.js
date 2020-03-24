@@ -40,7 +40,7 @@ const styles = theme => ({
         '& Checkbox-checked': {
             color: bgColor,
         },
-        marginTop:"15px"
+        marginTop: "15px"
     }
 })
 
@@ -84,35 +84,35 @@ class Login extends Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <form className={classes.form} noValidate onSubmit={e => this.submitHandler(e)}>
-                        <Typography variant="h5"  component="h1" align="center">Sign in</Typography>
+                        <Typography variant="h5" component="h1" align="center">{window.i18n.t("login.signIn")}</Typography>
                         <Grid>
-                            <TextField label="Username" autoFocus margin="normal" required fullWidth name="username" type="text" onChange={e => this.inputHandler(e)} value={state.username} /><br />
+                            <TextField label={window.i18n.t("login.username")} autoFocus margin="normal" required fullWidth name="username" type="text" onChange={e => this.inputHandler(e)} value={state.username} /><br />
                         </Grid>
 
                         <Grid>
-                            <TextField label="Password" margin="normal" required
+                            <TextField label={window.i18n.t("login.password")} margin="normal" required
                                 fullWidth name="password" type="password" onChange={e => this.inputHandler(e)} value={state.password} />
                         </Grid>
                         <FormControlLabel
                             className={classes.themeColor}
                             control={<Checkbox value="remember" />}
-                            label="Remember me"
+                            label={window.i18n.t("login.rememberMe")}
                         />
 
                         <Button
                             type="submit"
                             fullWidth
-                        >Login</Button>
+                        >{window.i18n.t("login.login")}</Button>
 
                         <Grid container>
                             <Grid item xs>
                                 <Link onClick={() => this.animated.show()} variant="body2" className={classes.themeColor} >
-                                    {"Forgot password?"}
+                                {window.i18n.t("login.forgotPassword")}
                                 </Link>
                             </Grid>
                             <Grid item>
                                 <Link href="#/register" variant="body2" className={classes.themeColor} >
-                                    {"Don't have an account? Sign Up"}
+                                {window.i18n.t("login.signUp")}
                                 </Link>
                             </Grid>
                         </Grid>

@@ -24,3 +24,14 @@ export const FETCH_START = "FETCH_START";
 export const FETCH_PENDING = "FETCH_PENDING";
 export const FETCH_STOP = "FETCH_STOP";
 export const FETCH_FAIL = "FETCH_FAIL";
+
+
+// User Settings
+export const USER_SAVE = "USER_SAVE";
+export const CHANGE_PASSWORD = "CHANGE_PASSWORD";
+export const GET_USER = "GET_USER";
+export const EDIT_USER = "EDIT_USER";
+export const SAVE_USER = "SAVE_USER";
+
+//Header 
+export const LANG_CHANGE = "LANG_CHANGE"

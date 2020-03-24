@@ -9,4 +9,6 @@ public class SecurityConstants {
     public static final String CONFIRM_REGISTRATION="/user/confirmRegistration";
     public static final String PASSWORD_RESET_EMAIL="/user/sendPasswordEmail";
     public static final String PASSWORD_RESET_TOKEN="/user/resetPassword";
+    public static final String CONFIRM_EMAIL_CHANGE="/user/changeEmailConfirm";
+    public static final String CONFIRM_PASSWORD_CHANGE="/user/changePasswordConfirm";
 }

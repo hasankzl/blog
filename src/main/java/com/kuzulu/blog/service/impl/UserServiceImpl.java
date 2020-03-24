@@ -23,7 +23,10 @@ public class UserServiceImpl implements UserService {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             userRepository.save(user);
     }
-
+    @Override
+    public void update(Users user) {
+        userRepository.save(user);
+    }
     @Override
     public UserDetails findByUsername(String Username) throws UsernameNotFoundException {
         Users user = userRepository.findByUsername(Username);
@@ -36,6 +39,17 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public Users getUserByUsername(String Username) throws UsernameNotFoundException {
+        Users user = userRepository.findByUsername(Username);
+
+        if(user == null){
+            throw new UsernameNotFoundException(Username);
+        }
+        else {
+           return user;
+        }
+    }
     @Override
     public void changePassword(Users user, String password) {
         user.setPassword(bCryptPasswordEncoder.encode(password));
